@@ -1,6 +1,5 @@
-@extends('layouts.admin')
-@section('header', 'Manage Blogs')
-@section('content')
+<x-admin-layout>
+<x-slot:header>Manage Blogs</x-slot:header>
 <div class="space-y-8">
     <div class="flex items-center justify-between">
         <h2 class="text-2xl font-black text-white uppercase tracking-tighter">Blog <span class="text-indigo-500 italic">Journal</span></h2>
@@ -32,4 +31,4 @@
     </div>
     <div class="pt-8">{{ $blogs->links() }}</div>
 </div>
-@endsection
+</x-admin-layout>

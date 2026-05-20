@@ -1,6 +1,5 @@
-@extends('layouts.admin')
-@section('header', 'Manage Destinations')
-@section('content')
+<x-admin-layout>
+<x-slot:header>Manage Destinations</x-slot:header>
 <div class="space-y-10">
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-6" data-aos="fade-down">
         <div>
@@ -77,5 +76,5 @@
     </div>
     <div class="pt-4">{{ $destinations->links() }}</div>
 </div>
-@endsection
+</x-admin-layout>
 

@@ -1,6 +1,5 @@
-@extends('layouts.admin')
-@section('header', 'Edit Blog Post')
-@section('content')
+<x-admin-layout>
+<x-slot:header>Edit Blog Post</x-slot:header>
 <div class="max-w-3xl">
     <form action="{{ route('admin.blogs.update', $blog) }}" method="POST" class="glass p-12 rounded-[3rem] border-white/5 space-y-8">
         @csrf @method('PUT')
@@ -11,4 +10,4 @@
         <button type="submit" class="btn-luxury px-12 py-5">Update Blog</button>
     </form>
 </div>
-@endsection
+</x-admin-layout>

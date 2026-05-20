@@ -1,6 +1,5 @@
-@extends('layouts.admin')
-@section('header', 'New Blog Post')
-@section('content')
+<x-admin-layout>
+<x-slot:header>New Blog Post</x-slot:header>
 <div class="max-w-3xl">
     <form action="{{ route('admin.blogs.store') }}" method="POST" class="glass p-12 rounded-[3rem] border-white/5 space-y-8">
         @csrf
@@ -12,4 +11,4 @@
         <button type="submit" class="btn-luxury px-12 py-5">Publish Blog</button>
     </form>
 </div>
-@endsection
+</x-admin-layout>

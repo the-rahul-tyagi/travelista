@@ -1,6 +1,5 @@
-@extends('layouts.admin')
-@section('header', 'Create Coupon')
-@section('content')
+<x-admin-layout>
+<x-slot:header>Create Coupon</x-slot:header>
 <div class="max-w-2xl mx-auto">
     <div class="mb-8" data-aos="fade-down">
         <a href="{{ route('admin.coupons.index') }}" class="text-[10px] font-black text-blue-500 uppercase tracking-widest hover:text-blue-400 flex items-center mb-6">
@@ -72,4 +71,4 @@
         </div>
     </form>
 </div>
-@endsection
+</x-admin-layout>

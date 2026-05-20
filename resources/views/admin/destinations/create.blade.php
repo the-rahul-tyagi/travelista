@@ -1,6 +1,5 @@
-@extends('layouts.admin')
-@section('header', 'Add Destination')
-@section('content')
+<x-admin-layout>
+<x-slot:header>Add Destination</x-slot:header>
 <div class="max-w-4xl mx-auto">
     <form action="{{ route('admin.destinations.store') }}" method="POST" enctype="multipart/form-data" class="glass p-12 rounded-[3rem] border-white/5 space-y-8">
         @csrf
@@ -77,4 +76,4 @@
         </div>
     </form>
 </div>
-@endsection
+</x-admin-layout>

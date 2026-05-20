@@ -1,6 +1,5 @@
-@extends('layouts.admin')
-@section('header', 'Tour Packages')
-@section('content')
+<x-admin-layout>
+<x-slot:header>Tour Packages</x-slot:header>
 <div class="space-y-10">
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-6" data-aos="fade-down">
         <div>
@@ -79,5 +78,5 @@
     </div>
     <div class="pt-4">{{ $packages->links() }}</div>
 </div>
-@endsection
+</x-admin-layout>
 

@@ -1,6 +1,5 @@
-@extends('layouts.admin')
-@section('header', 'Add Offer')
-@section('content')
+<x-admin-layout>
+<x-slot:header>Add Offer</x-slot:header>
 <div class="max-w-3xl">
     <form action="{{ route('admin.offers.store') }}" method="POST" class="glass p-12 rounded-[3rem] border-white/5 space-y-8">
         @csrf
@@ -37,4 +36,4 @@
         <button type="submit" class="btn-luxury px-12 py-5">Create Offer</button>
     </form>
 </div>
-@endsection
+</x-admin-layout>

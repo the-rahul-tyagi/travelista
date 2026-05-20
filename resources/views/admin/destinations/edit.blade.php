@@ -1,6 +1,5 @@
-@extends('layouts.admin')
-@section('header', 'Edit Destination')
-@section('content')
+<x-admin-layout>
+<x-slot:header>Edit Destination</x-slot:header>
 <div class="max-w-4xl mx-auto">
     <form action="{{ route('admin.destinations.update', $destination) }}" method="POST" enctype="multipart/form-data" class="glass p-12 rounded-[3rem] border-white/5 space-y-8">
         @csrf @method('PUT')
@@ -83,4 +82,4 @@
         </div>
     </form>
 </div>
-@endsection
+</x-admin-layout>

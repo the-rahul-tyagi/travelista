@@ -1,8 +1,5 @@
-@extends('layouts.admin')
-
-@section('header', 'Coupon Management')
-
-@section('content')
+<x-admin-layout>
+<x-slot:header>Coupon Management</x-slot:header>
 <div class="space-y-12">
     <div class="flex items-center justify-between" data-aos="fade-down">
         <div>
@@ -77,4 +74,4 @@
     </div>
     @endif
 </div>
-@endsection
+</x-admin-layout>

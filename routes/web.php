@@ -220,9 +220,18 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::delete('/offers/{offer}', [AdminController::class, 'destroyOffer'])->name('offers.destroy');
 });
 
-use App\Http\Controllers\Auth\GoogleController;
 
-Route::get('/auth/google', [GoogleController::class, 'redirect'])->name('google.login');
-Route::get('/auth/google/callback', [GoogleController::class, 'callback']);
 
 require __DIR__.'/auth.php';
+
+Route::get('/test-dashboard', function () {
+    // Fake the stats and recent activities just to render the view
+    $stats = ['total_revenue' => 100, 'total_users' => 10, 'recent_users' => 1, 'total_bookings' => 10, 'confirmed_bookings' => 5, 'pending_bookings' => 2, 'hotel_bookings' => 2, 'package_bookings' => 3, 'active_users' => 5, 'cancelled_bookings' => 1, 'total_destinations' => 10, 'total_packages' => 10, 'total_hotels' => 10];
+    $recentBookings = collect();
+    $recentActivities = collect();
+    $topDestinations = collect();
+    $topPackages = collect();
+    $topHotels = collect();
+    $chartData = ['labels' => [], 'revenue' => [], 'bookings' => []];
+    return view('admin.dashboard', compact('stats', 'recentBookings', 'recentActivities', 'topDestinations', 'topPackages', 'topHotels', 'chartData'));
+});

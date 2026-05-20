@@ -33,12 +33,19 @@
         </div>
     </div>
 
-    <div class="min-h-screen flex flex-col">
+    <div class="min-h-screen flex flex-col relative">
+        <!-- Sleek Motional Floating Background Spheres -->
+        <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none">
+            <div class="absolute w-[600px] h-[600px] rounded-full bg-blue-600/5 dark:bg-blue-600/[0.03] blur-[150px] animate-float-slow" style="top: -10%; left: -10%;"></div>
+            <div class="absolute w-[500px] h-[500px] rounded-full bg-purple-600/5 dark:bg-purple-600/[0.03] blur-[130px] animate-float-medium" style="bottom: 10%; right: -5%;"></div>
+            <div class="absolute w-[400px] h-[400px] rounded-full bg-emerald-500/5 dark:bg-emerald-500/[0.02] blur-[120px] animate-float-fast" style="top: 40%; left: 30%;"></div>
+        </div>
+
         <!-- Sticky Transparent Navbar -->
         <x-travelista.navbar />
 
         <!-- Main Page Content -->
-        <main class="flex-grow">
+        <main class="flex-grow relative z-10">
             {{ $slot }}
         </main>
 
@@ -85,5 +92,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     </script>
+    @stack('scripts')
 </body>
 </html>
