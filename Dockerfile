@@ -9,12 +9,13 @@ RUN npm run build
 # Stage 2: Create the production runtime image
 FROM webdevops/php-nginx:8.3-alpine
 
-# Set environment variables for the new web server image
-ENV WEB_DOCUMENT_ROOT=/var/www/html/public
-ENV APP_ENV=production
-
 # Set working directory
 WORKDIR /var/www/html
+
+# Environment variables to fix the 502 error
+ENV WEB_DOCUMENT_ROOT=/var/www/html/public
+ENV PHP_DISPLAY_ERRORS=0
+ENV PHP_MAX_EXECUTION_TIME=300
 
 # Copy project files
 COPY . .
@@ -22,7 +23,7 @@ COPY . .
 # Copy compiled assets from Stage 1
 COPY --from=assets-builder /app/public/build ./public/build
 
-# Run composer installation for production dependencies
+# Run composer update (to match PHP 8.3)
 RUN composer update --no-dev --optimize-autoloader
 
 # Set correct storage permissions for Laravel
