@@ -33,7 +33,7 @@ RUN mkdir -p /var/www/html/storage /var/www/html/bootstrap/cache && \
 # Copy your entrypoint script
 COPY entrypoint.sh /entrypoint.sh
 
-# Make it executable inside the container
+# Make it executable
 RUN chmod +x /entrypoint.sh
 
 # Set the entrypoint

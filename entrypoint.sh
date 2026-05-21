@@ -3,6 +3,7 @@
 # 1. Run migrations
 php /var/www/html/artisan migrate --force
 
-# 2. Run the original entrypoint that starts Nginx and PHP-FPM
-# This is the standard location for the webdevops entrypoint
-exec /opt/docker/bin/entrypoint.sh
+# 2. Start the services correctly
+# Using 'set --' and '$@' passes all arguments the container received to the real entrypoint
+set -- /opt/docker/bin/entrypoint.sh "$@"
+exec "$@"
