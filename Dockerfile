@@ -23,7 +23,7 @@ COPY . .
 COPY --from=assets-builder /app/public/build ./public/build
 
 # Run composer installation for production dependencies
-RUN composer install --no-dev --optimize-autoloader
+RUN composer update --no-dev --optimize-autoloader
 
 # Set correct storage permissions for Laravel
 RUN mkdir -p /var/www/html/storage /var/www/html/bootstrap/cache && \
