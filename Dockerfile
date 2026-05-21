@@ -29,3 +29,12 @@ RUN composer update --no-dev --optimize-autoloader
 # Set correct storage permissions for Laravel
 RUN mkdir -p /var/www/html/storage /var/www/html/bootstrap/cache && \
     chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Copy your entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+
+# Make it executable inside the container
+RUN chmod +x /entrypoint.sh
+
+# Set the entrypoint
+ENTRYPOINT ["/entrypoint.sh"]
