@@ -30,10 +30,10 @@
                     <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
                     <div class="relative group">
-                        <input type="email" name="email" value="{{ old('email', $request->email) }}" required readonly
-                               class="peer w-full bg-white/2 border-b-2 border-white/5 px-0 py-3 text-slate-500 text-sm placeholder-transparent focus:border-blue-600 focus:ring-0 transition-all font-bold outline-none cursor-not-allowed" 
+                        <input type="email" name="email" value="{{ old('email', $request->email) }}" required 
+                               class="peer w-full bg-white/5 border-b-2 border-white/10 px-0 py-3 text-white text-sm placeholder-transparent focus:border-blue-600 focus:ring-0 transition-all font-bold outline-none @error('email') border-red-500 @enderror" 
                                placeholder="Email">
-                        <label class="absolute left-0 -top-3.5 text-[9px] font-black text-slate-500 uppercase tracking-widest transition-all">Identity</label>
+                        <label class="absolute left-0 -top-3.5 text-[9px] font-black text-slate-500 uppercase tracking-widest transition-all peer-placeholder-shown:text-xs peer-placeholder-shown:top-3 peer-placeholder-shown:text-slate-600 peer-focus:-top-3.5 peer-focus:text-blue-500 peer-focus:text-[9px]">Email Address</label>
                         @error('email')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror

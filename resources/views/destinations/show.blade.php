@@ -93,7 +93,7 @@
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                         @foreach($destination->hotels as $hotel)
-                        <div class="glass group rounded-[3rem] overflow-hidden border-white/5 transition-all duration-500 hover:-translate-y-2">
+                        <div class="glass group card-glare rounded-[3rem] overflow-hidden border-white/5 transition-all duration-500 hover:-translate-y-2">
                             <div class="relative h-64 overflow-hidden">
                                 <img src="{{ $hotel->image_url }}" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="">
                                 <div class="absolute top-6 right-6">
@@ -124,7 +124,7 @@
                         <div class="swiper-wrapper">
                             @foreach($destination->tourPackages as $package)
                             <div class="swiper-slide !h-auto">
-                                <div class="glass group rounded-[3.5rem] overflow-hidden border-white/5 h-full flex flex-col">
+                                <div class="glass group card-glare rounded-[3.5rem] overflow-hidden border-white/5 h-full flex flex-col">
                                     <div class="relative h-72 overflow-hidden">
                                         <img src="{{ $package->image_url }}" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="">
                                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>

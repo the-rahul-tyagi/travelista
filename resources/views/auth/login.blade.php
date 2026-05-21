@@ -47,6 +47,9 @@
                     </p>
                 </div>
 
+                <!-- Session Status -->
+                <x-auth-session-status class="mb-6 p-4 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-2xl text-xs font-bold text-center" :status="session('status')" />
+
                 <!-- Form -->
                 <form method="POST" action="{{ route('login') }}" class="space-y-6">
                     @csrf

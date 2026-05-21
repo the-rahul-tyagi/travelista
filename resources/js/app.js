@@ -43,6 +43,6 @@ AOS.init({
 // Dark mode toggle helper
 if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     document.documentElement.classList.add('dark');
-} else {
+} else if (!document.documentElement.classList.contains('force-dark')) {
     document.documentElement.classList.remove('dark');
 }
