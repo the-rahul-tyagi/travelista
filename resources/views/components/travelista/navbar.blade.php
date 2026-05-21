@@ -62,6 +62,17 @@
                                     </div>
                                 </a>
 
+                                <!-- Saved Plans -->
+                                <a href="{{ route('trip-planner.index') }}#saved-plans" class="flex items-start space-x-4 p-3 rounded-2xl hover:bg-white/5 transition-all group/item">
+                                    <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center shrink-0 group-hover/item:scale-110 group-hover/item:bg-indigo-600 group-hover/item:text-white transition-all duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs font-black text-white uppercase tracking-wider group-hover/item:text-indigo-400 transition-colors">My Saved Plans</p>
+                                        <p class="text-[9px] text-slate-400 font-medium leading-relaxed mt-0.5">Access and load your previously saved intelligent travel blueprints.</p>
+                                    </div>
+                                </a>
+
                                 <!-- Offers -->
                                 <a href="{{ route('offers.index') }}" class="flex items-start space-x-4 p-3 rounded-2xl hover:bg-white/5 transition-all group/item">
                                     <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center shrink-0 group-hover/item:scale-110 group-hover/item:bg-amber-600 group-hover/item:text-white transition-all duration-300">
@@ -199,6 +210,7 @@
                 <a href="{{ route('hotels.index') }}" class="text-xs font-black text-white uppercase tracking-widest">Hotels</a>
                 <a href="{{ route('trip-planner.index') }}#smart-planner" class="text-xs font-black text-white uppercase tracking-widest">Trip Planner</a>
                 <a href="{{ route('trip-planner.index') }}#expense-estimator" class="text-xs font-black text-white uppercase tracking-widest">Expense Estimator</a>
+                <a href="{{ route('trip-planner.index') }}#saved-plans" class="text-xs font-black text-white uppercase tracking-widest">Saved Plans</a>
                 <a href="{{ route('offers.index') }}" class="text-xs font-black text-white uppercase tracking-widest">Offers</a>
                 <a href="{{ route('contact') }}" class="text-xs font-black text-white uppercase tracking-widest">Contact</a>
             @else

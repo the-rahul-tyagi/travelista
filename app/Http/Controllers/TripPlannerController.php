@@ -24,7 +24,10 @@ class TripPlannerController extends Controller
     public function create()
     {
         $states = State::where('status', 'active')->orderBy('name')->get();
-        return view('trip-planner.index', compact('states'));
+        $savedPlans = auth()->check()
+            ? TripPlan::where('user_id', auth()->id())->with('state')->latest()->get()
+            : collect();
+        return view('trip-planner.index', compact('states', 'savedPlans'));
     }
 
     /**
@@ -61,6 +64,7 @@ class TripPlannerController extends Controller
 
         if (Auth::check()) {
             $tripPlan = TripPlan::create(array_merge($validated, ['user_id' => Auth::id()]));
+            $tripPlan->load('state');
         } else {
             $tripPlan = new TripPlan($validated);
         }
@@ -69,6 +73,7 @@ class TripPlannerController extends Controller
 
         return response()->json([
             'trip_plan_id' => $tripPlan->id ?? null,
+            'trip_plan' => $tripPlan,
             'suggestions' => $suggestions,
         ]);
     }

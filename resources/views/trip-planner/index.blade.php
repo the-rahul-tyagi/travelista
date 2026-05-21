@@ -32,10 +32,46 @@
         <div class="absolute bottom-1/4 right-0 w-96 h-96 bg-blue-500/5 rounded-full blur-[120px] pointer-events-none"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-                
+            <!-- Premium Glass Tab Switcher -->
+            <div class="flex justify-center mb-16" data-aos="fade-up">
+                <div class="glass p-2.5 rounded-[2rem] border border-white/5 flex items-center space-x-2 bg-slate-900/60 shadow-2xl relative">
+                    <!-- Tab 1: Smart Planner -->
+                    <button type="button" @click="activeTab = 'smart-planner'; window.location.hash = 'smart-planner'" 
+                            :class="activeTab === 'smart-planner' ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20' : 'text-slate-400 hover:text-white hover:bg-white/5'"
+                            class="px-6 py-3 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-300 flex items-center space-x-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+                        <span>Smart Planner</span>
+                    </button>
+                    
+                    <!-- Tab 2: Expense Estimator -->
+                    <button type="button" @click="activeTab = 'expense-estimator'; window.location.hash = 'expense-estimator'" 
+                            :class="activeTab === 'expense-estimator' ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20' : 'text-slate-400 hover:text-white hover:bg-white/5'"
+                            class="px-6 py-3 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-300 flex items-center space-x-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span>Expense Estimator</span>
+                    </button>
+
+                    <!-- Tab 3: Saved Plans -->
+                    <button type="button" @click="activeTab = 'saved-plans'; window.location.hash = 'saved-plans'" 
+                            :class="activeTab === 'saved-plans' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-650/20' : 'text-slate-400 hover:text-white hover:bg-white/5'"
+                            class="px-6 py-3 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-300 flex items-center space-x-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>
+                        <span>My Saved Plans</span>
+                        <template x-if="savedPlans.length > 0">
+                            <span class="ml-1.5 bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 text-[8px] font-black px-1.5 py-0.5 rounded-full" x-text="savedPlans.length"></span>
+                        </template>
+                    </button>
+                </div>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
                 <!-- Smart Planner Card -->
-                <div id="smart-planner" class="scroll-mt-28 glass p-8 md:p-12 rounded-[3.5rem] border border-white/5 shadow-2xl relative bg-slate-950/40 backdrop-blur-xl">
+                <div id="smart-planner" 
+                     x-show="activeTab === 'smart-planner'"
+                     x-transition:enter="transition ease-out duration-300"
+                     x-transition:enter-start="opacity-0 translate-y-4"
+                     x-transition:enter-end="opacity-100 translate-y-0"
+                     class="scroll-mt-28 glass p-8 md:p-12 rounded-[3.5rem] border border-white/5 shadow-2xl relative bg-slate-950/40 backdrop-blur-xl">
                     <!-- Title & Badge -->
                     <div class="mb-10 flex justify-between items-start">
                         <div>
@@ -135,7 +171,12 @@
                 </div>
 
                 <!-- Expense Estimator Card -->
-                <div id="expense-estimator" class="scroll-mt-28 glass p-8 md:p-12 rounded-[3.5rem] border border-white/5 shadow-2xl relative bg-slate-950/40 backdrop-blur-xl">
+                <div id="expense-estimator" 
+                     x-show="activeTab === 'expense-estimator'"
+                     x-transition:enter="transition ease-out duration-300"
+                     x-transition:enter-start="opacity-0 translate-y-4"
+                     x-transition:enter-end="opacity-100 translate-y-0"
+                     class="scroll-mt-28 glass p-8 md:p-12 rounded-[3.5rem] border border-white/5 shadow-2xl relative bg-slate-950/40 backdrop-blur-xl">
                     <!-- Title & Badge -->
                     <div class="mb-10 flex justify-between items-start">
                         <div>
@@ -305,6 +346,82 @@
                         </div>
                     </form>
                 </div>
+
+                <!-- Saved Plans Card -->
+                <div x-show="activeTab === 'saved-plans'"
+                     x-transition:enter="transition ease-out duration-300"
+                     x-transition:enter-start="opacity-0 translate-y-4"
+                     x-transition:enter-end="opacity-100 translate-y-0"
+                     id="saved-plans" class="scroll-mt-28 glass p-8 md:p-12 rounded-[3.5rem] border border-white/5 shadow-2xl relative bg-slate-950/40 backdrop-blur-xl">
+                    <!-- Title & Badge -->
+                    <div class="mb-10 flex justify-between items-start">
+                        <div>
+                            <span class="text-[9px] font-black text-indigo-400 uppercase tracking-[0.3em] block mb-2">Saved Blueprints</span>
+                            <h2 class="text-3xl md:text-4xl font-black text-white uppercase tracking-tighter">
+                                My Saved <span class="text-indigo-400 italic">Plans</span>
+                            </h2>
+                        </div>
+                        <div class="w-10 h-10 rounded-2xl bg-indigo-500/10 flex items-center justify-center text-indigo-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>
+                        </div>
+                    </div>
+
+                    @if(!auth()->check())
+                        <div class="text-center py-16 space-y-6">
+                            <p class="text-slate-400 text-xs font-medium max-w-sm mx-auto">Please sign in to save and view your custom AI travel blueprints.</p>
+                            <a href="{{ route('login') }}" class="inline-block text-[10px] font-black text-white uppercase tracking-widest bg-gradient-to-r from-blue-600 to-indigo-650 hover:shadow-blue-600/40 rounded-xl px-6 py-3 transition-all shadow-lg hover:scale-[1.03] active:scale-95 duration-300">Sign In</a>
+                        </div>
+                    @else
+                        <template x-if="savedPlans.length === 0">
+                            <div class="text-center py-16 space-y-4">
+                                <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-slate-500 mx-auto">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0a2 2 0 01-2 2H6a2 2 0 01-2-2m16 0V9a2 2 0 00-2-2H6a2 2 0 00-2 2v2m16 4h-2m-2 0h-4M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                                </div>
+                                <p class="text-slate-400 text-xs font-medium">You haven't saved any travel plans yet.</p>
+                                <button type="button" @click="activeTab = 'smart-planner'; window.location.hash = 'smart-planner'" class="text-[9px] font-black text-emerald-400 hover:text-emerald-300 uppercase tracking-wider transition-all">Create your first blueprint &rarr;</button>
+                            </div>
+                        </template>
+                        <template x-if="savedPlans.length > 0">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <template x-for="plan in savedPlans" :key="plan.id">
+                                    <div class="glass p-6 rounded-3xl border border-white/5 bg-slate-900/40 relative overflow-hidden flex flex-col justify-between hover:border-indigo-500/25 hover:shadow-lg transition-all duration-300">
+                                        <div>
+                                            <div class="flex justify-between items-start mb-4">
+                                                <span class="px-2.5 py-1 text-[8px] font-black uppercase text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 rounded-lg" x-text="plan.days + ' Days'"></span>
+                                                <span class="text-[9px] font-black text-slate-500 uppercase tracking-wider" x-text="formatDate(plan.created_at)"></span>
+                                            </div>
+
+                                            <h3 class="text-lg font-black text-white uppercase tracking-tight mb-2">
+                                                Trip to <span class="text-indigo-450" x-text="plan.state ? plan.state.name : 'Custom Destination'"></span>
+                                            </h3>
+
+                                            <div class="space-y-2 mb-6">
+                                                <div class="flex items-center text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                                                    <svg class="w-3.5 h-3.5 text-slate-500 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                                    <span>Budget: <span x-text="formatCurrency(plan.budget)"></span></span>
+                                                </div>
+                                                <div class="flex items-center text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                                                    <svg class="w-3.5 h-3.5 text-slate-500 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                                    <span>Style: <span class="capitalize text-indigo-300 ml-1" x-text="plan.travel_type"></span></span>
+                                                </div>
+                                                <template x-if="plan.travelers">
+                                                    <div class="flex items-center text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                                                        <svg class="w-3.5 h-3.5 text-slate-500 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                                        <span>Explorers: <span x-text="plan.travelers"></span></span>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </div>
+
+                                        <button type="button" @click="loadSavedPlan(plan)" class="w-full py-3.5 rounded-2xl text-[10px] font-black uppercase tracking-wider text-white bg-indigo-600 hover:bg-indigo-700 transition-all text-center shadow-lg shadow-indigo-600/10">
+                                            Reload Blueprint
+                                        </button>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+                    @endif
+                </div>
             </div>
 
             <!-- Suggestions Results Area -->
@@ -315,10 +432,25 @@
                         <span class="text-[9px] font-black text-emerald-500 uppercase tracking-[0.3em] block mb-2">Curated Blueprint</span>
                         <h3 class="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter">Your Travel <span class="text-emerald-500 italic">Blueprint</span></h3>
                     </div>
-                    <span class="inline-flex items-center space-x-2 px-5 py-2.5 glass rounded-xl text-[9px] font-black uppercase tracking-widest text-emerald-400 border border-emerald-400/20 self-start md:self-auto">
-                        <svg class="w-3.5 h-3.5 text-emerald-400 animate-pulse" fill="currentColor" viewBox="0 0 20 20"><path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464a1 1 0 10-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1a1 1 0 112 0v1a1 1 0 11-2 0zM5.657 13.05a1 1 0 10-1.414 1.414l.707.707a1 1 0 001.414-1.414l-.707-.707zM14.343 14.343a1 1 0 011.414 0l.707.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 010-1.414z"></path></svg>
-                        <span>Custom AI Matches</span>
-                    </span>
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                        <template x-if="results.trip_plan_id">
+                            <span class="inline-flex items-center space-x-2 px-4 py-2 glass rounded-xl text-[9px] font-black uppercase tracking-wider text-indigo-400 border border-indigo-400/25 bg-indigo-500/5 shadow-lg shadow-indigo-500/5 animate-pulse">
+                                <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Saved to My Saved Plans</span>
+                            </span>
+                        </template>
+                        <template x-if="!results.trip_plan_id">
+                            <button type="button" @click="savePlan()" :disabled="savingPlan" class="inline-flex items-center space-x-2 px-5 py-2.5 glass rounded-xl text-[9px] font-black uppercase tracking-widest text-indigo-400 border border-indigo-500/30 bg-indigo-500/10 hover:bg-indigo-500/20 hover:text-white transition-all shadow-lg hover:scale-[1.03] active:scale-95 duration-300">
+                                <svg x-show="!savingPlan" class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>
+                                <svg x-show="savingPlan" class="w-3.5 h-3.5 text-indigo-400 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                                <span x-text="savingPlan ? 'Saving Plan...' : 'Save This Plan'"></span>
+                            </button>
+                        </template>
+                        <span class="inline-flex items-center space-x-2 px-5 py-2.5 glass rounded-xl text-[9px] font-black uppercase tracking-widest text-emerald-400 border border-emerald-400/20 self-start md:self-auto">
+                            <svg class="w-3.5 h-3.5 text-emerald-400 animate-pulse" fill="currentColor" viewBox="0 0 20 20"><path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464a1 1 0 10-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1a1 1 0 112 0v1a1 1 0 11-2 0zM5.657 13.05a1 1 0 10-1.414 1.414l.707.707a1 1 0 001.414-1.414l-.707-.707zM14.343 14.343a1 1 0 011.414 0l.707.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 010-1.414z"></path></svg>
+                            <span>Custom AI Matches</span>
+                        </span>
+                    </div>
                 </div>
                 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 items-stretch">
@@ -477,6 +609,7 @@
     <script>
         function tripPlanner() {
             return {
+                activeTab: 'smart-planner',
                 planner: { budget: 50000, days: 5, travel_type: 'adventure', state_id: {{ $states->first()->id ?? 1 }} },
                 calculator: { budget: 50000, days: 5, travel_type: 'adventure', travelers: 2 },
                 results: { suggestions: { destinations: [], packages: [], hotels: [], activities: [] } },
@@ -485,6 +618,35 @@
                 loadingPlanner: false,
                 loadingCalculator: false,
                 resultsFetched: false,
+                savingPlan: false,
+                savedPlans: @json($savedPlans),
+                activePlanner: null,
+                
+                init() {
+                    const handleHash = () => {
+                        const hash = window.location.hash.replace('#', '');
+                        if (['smart-planner', 'expense-estimator', 'saved-plans'].includes(hash)) {
+                            this.activeTab = hash;
+                        }
+                    };
+                    handleHash();
+                    window.addEventListener('hashchange', handleHash);
+                },
+
+                loadSavedPlan(plan) {
+                    this.planner.budget = plan.budget;
+                    this.planner.days = plan.days;
+                    this.planner.travel_type = plan.travel_type;
+                    this.planner.state_id = plan.state_id;
+                    if (plan.travelers) {
+                        this.planner.travelers = plan.travelers;
+                    }
+                    
+                    this.activeTab = 'smart-planner';
+                    window.location.hash = 'smart-planner';
+                    
+                    this.submitPlan(plan.id);
+                },
                 
                 formatCurrency(val) {
                     return '₹' + Number(val || 0).toLocaleString('en-IN');
@@ -493,10 +655,23 @@
                     let count = Math.round(rating || 5);
                     return Array(count).fill(0);
                 },
+                formatDate(dateStr) {
+                    if (!dateStr) return 'just now';
+                    const date = new Date(dateStr);
+                    const seconds = Math.max(0, Math.floor((new Date() - date) / 1000));
+                    if (seconds < 60) return 'just now';
+                    const minutes = Math.floor(seconds / 60);
+                    if (minutes < 60) return minutes + 'm ago';
+                    const hours = Math.floor(minutes / 60);
+                    if (hours < 24) return hours + 'h ago';
+                    const days = Math.floor(hours / 24);
+                    if (days < 30) return days + 'd ago';
+                    return date.toLocaleDateString();
+                },
                 
-                submitPlan() {
+                submitPlan(planId = null) {
                     this.loadingPlanner = true;
-                    fetch("{{ route('trip-planner.store') }}", {
+                    fetch("{{ route('trip-planner.suggest') }}", {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -506,7 +681,11 @@
                     })
                     .then(res => res.json())
                     .then(data => { 
-                        this.results = data; 
+                        this.results = data;
+                        if (planId) {
+                            this.results.trip_plan_id = planId;
+                        }
+                        this.activePlanner = { ...this.planner };
                         this.resultsFetched = true;
                         this.loadingPlanner = false;
                         setTimeout(() => {
@@ -517,6 +696,33 @@
                         console.error("Planner error:", err);
                         this.loadingPlanner = false;
                         alert("An error occurred while generating the plan. Please check your inputs.");
+                    });
+                },
+
+                savePlan() {
+                    this.savingPlan = true;
+                    fetch("{{ route('trip-planner.store') }}", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify(this.activePlanner || this.planner)
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        this.savingPlan = false;
+                        if (data.trip_plan_id) {
+                            this.results.trip_plan_id = data.trip_plan_id;
+                            if (data.trip_plan) {
+                                this.savedPlans.unshift(data.trip_plan);
+                            }
+                        }
+                    })
+                    .catch((err) => {
+                        console.error("Save plan error:", err);
+                        this.savingPlan = false;
+                        alert("An error occurred while saving the plan.");
                     });
                 },
                 
