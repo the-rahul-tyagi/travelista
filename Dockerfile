@@ -7,7 +7,11 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Create the production runtime image
-FROM richarvey/nginx-php-fpm:8.3.19-fpm-alpine3.21-nginx-1.27.4
+FROM webdevops/php-nginx:8.3-alpine
+
+# Set environment variables for the new web server image
+ENV WEB_DOCUMENT_ROOT=/var/www/html/public
+ENV APP_ENV=production
 
 # Set working directory
 WORKDIR /var/www/html
@@ -24,7 +28,3 @@ RUN composer install --no-dev --optimize-autoloader
 # Set correct storage permissions for Laravel
 RUN mkdir -p /var/www/html/storage /var/www/html/bootstrap/cache && \
     chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache
-
-# Environment configurations for the base image
-ENV WEBROOT=/var/www/html/public
-ENV SKIP_COMPOSER=1
